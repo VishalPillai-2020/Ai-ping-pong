@@ -1,1 +1,22 @@
-body{}
+body{
+    font-family:Proxima !important;
+}
+@font-face {
+    font-family: Proxima;
+    src: url(ProximaNova-Regular.woff);
+    
+  }
+h1{
+   font-size:xx-large;
+
+   color:white;
+}
+button{
+    float:right;
+    margin-right:10px;
+    font-size:18px;
+    border:none;
+    background-color:rgba(128, 128, 128, 0.561);
+    color:white;
+    border-radius:10px;
+}
