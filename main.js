@@ -22,16 +22,7 @@ var ball = {
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas");
-  video = createCapture(VIDEO);
-  video.hide();
-  video.size(300,500);
-
-  posenet = ml5.poseNet(video, modelLoaded);
 }
-function modelLoaded(){
-  console.log("Model is Loaded");
-}
-
 
 
 function draw(){
@@ -133,16 +124,9 @@ function move(){
   }
 }
 if(pcscore ==4){
-    fill("#FFA500");
-    stroke(0)
-    rect(0,0,width,height-1);
-    fill("white");
-    stroke("white");
-    textSize(25)
-    text("Game Over!☹☹",width/2,height/2);
-    text("Reload The Page!",width/2,height/2+30)
-    noLoop();
-    pcscore = 0;
+
+
+location.reload();
 }
    if(ball.y+ball.r > height || ball.y-ball.r <0){
        ball.dy =- ball.dy;
