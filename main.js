@@ -27,7 +27,6 @@ function setup(){
   video.size(300,500);
 
   posenet = ml5.poseNet(video, modelLoaded);
-  posenet.on('pose', gotResults);
 }
 function modelLoaded(){
   console.log("Model is Loaded");
