@@ -1,4 +1,5 @@
-
+X=0;
+Y=0;
 var paddle2 =10,paddle1=10;
 
 var paddle1X = 10,paddle1Height = 110;
@@ -22,11 +23,25 @@ var ball = {
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas");
+  video = createCapture(VIDEO);
+  video.size(800,400);
+  video.parent("webcam");
+  posenet =ml5.poseNet(video,{inputResolution: 100}, modelLoaded);
+  posenet.on('pose', gotResults);
+  frameRate(60);
+}
+function modelLoaded(){
+  console.log("The Model Is Loaded");
 }
 
-
+function gotResults(results){
+  if (results.length > 0){
+    X = results[0].pose.rightWrist.x;
+    Y = results[0].pose.rightWrist.y;
+    console.log("Right Wrist X = "+X+" Right Wrist  Y = "+Y);
+  }
+}
 function draw(){
-
  background(0); 
 
  fill("black");
@@ -36,6 +51,10 @@ function draw(){
  fill("black");
  stroke("black");
  rect(0,0,20,700);
+
+ fill('red')
+ stroke('red');
+ circle(X,Y,20);
  
    //funtion paddleInCanvas call 
    paddleInCanvas();
