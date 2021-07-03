@@ -25,6 +25,10 @@ var ball = {
 }
 gameStatus = "";
 
+function preload(){
+    sound1 = loadSound("ball_touch_paddel.wav");
+    sound2 = loadSound("missed.wav");
+}
 function startGame() {
     gameStatus = "start";
     document.getElementById("l1").innerHTML = "Game Has Started"
@@ -68,10 +72,6 @@ function draw() {
         stroke("black");
         rect(0, 0, 20, 700);
 
-        fill('red')
-        stroke('red');
-        circle(X, Y, 20);
-
         //funtion paddleInCanvas call 
         paddleInCanvas();
 
@@ -80,7 +80,7 @@ function draw() {
         stroke(0, 0, 250);
         strokeWeight(0.5);
         paddle1Y = mouseY;
-        rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
+        rect(paddle1X, Y, paddle1, paddle1Height, 100);
 
 
         //pc computer paddle
@@ -150,14 +150,17 @@ function move() {
     ball.y = ball.y + ball.dy;
     if (ball.x + ball.r > width - ball.r / 2) {
         ball.dx = -ball.dx - 0.5;
+       
     }
     if (ball.x - 2.5 * ball.r / 2 < 0) {
-        if (ball.y >= paddle1Y && ball.y <= paddle1Y + paddle1Height) {
+        if (ball.y >= X && ball.y <= Y + paddle1Height) {
             ball.dx = -ball.dx + 0.5;
+            sound1.play();
         } else {
             pcscore++;
             reset();
             navigator.vibrate(100);
+            sound2.play();
         }
     }
     if (pcscore == 4) {
